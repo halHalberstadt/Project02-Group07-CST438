@@ -1,24 +1,30 @@
 # Project02-Group07-CST438
 
 ## Team Members (CST438 group 7): 
-Daisy Rocha-Montanez, Jose Barroso A, Turi Mbetjiha
-
-### Git links:
- - [Daisy Rocha-Montanez](https://github.com/daisyrocha)
- - [Jose Barroso A](https://github.com/jbarrosoarr)
- - [Turi Mbetjiha](https://github.com/TuriM98)
- - [Sterling 'Hal' Halberstadt](https://github.com/halHalberstadt)
+ - [Daisy Rocha-Montanez (job)](https://github.com/daisyrocha)
+ - [Jose Barroso A (job)](https://github.com/jbarrosoarr)
+ - [Turi Mbetjiha (job)](https://github.com/TuriM98)
+ - [Sterling 'Hal' Halberstadt (job)](https://github.com/halHalberstadt)
 
 ### Project Description<br>
 
-&nbsp;&nbsp;&nbsp; example
+&nbsp;&nbsp;&nbsp; Our project foucuses on making an API that displays wishlist information for users. Our API will have multiple webpages, users and a database of values that the user can interact with. 
 
-### Example:<br>
-&nbsp;&nbsp;&nbsp; example
+### Eample responces:<br>
+&nbsp;&nbsp;&nbsp; Here is a example response from the API in (insert) format: 
+
+```
+test
+```
 
 ### Useful Information:<br>
-&nbsp;&nbsp;&nbsp;
-Example
+
+Example Fields:
+
+| Field  | Example Values |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
 
 ### Links<br>
  Resources we found useful:
