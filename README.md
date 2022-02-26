@@ -26,6 +26,13 @@ Example Fields:
 | Content Cell  | Content Cell  |
 | Content Cell  | Content Cell  |
 
+Mock-up:
+
+Diagram of database structure:
+
+![Diagram 2022-02-26 12-54-45](https://user-images.githubusercontent.com/90930042/155858799-8f344bbe-3633-4cc5-ae52-861d4ba7946f.png)
+
+
 ### Links<br>
  Resources we found useful:
    - [test](https://github.com/)
