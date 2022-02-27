@@ -1,4 +1,4 @@
-# Project02-Group07-CST438
+# Project02-Group07-CST438 : "YourList"
 
 ## Team Members (CST438 group 7): 
  - [Daisy Rocha-Montanez (Backend Expert)](https://github.com/daisyrocha)
@@ -8,7 +8,7 @@
 
 ### Project Description<br>
 
-&nbsp;&nbsp;&nbsp; Our project foucuses on making an API that displays wishlist information for users. Our API will have multiple webpages, users and a database of values that the user can interact with. 
+&nbsp;&nbsp;&nbsp; Our project foucuses on making an API called 'YourList' that displays wishlist information for users. Our API will have multiple webpages, users and a database of values that the user can interact with. 
 
 ### Eample responces:<br>
 &nbsp;&nbsp;&nbsp; Here is a example response from the API in (insert) format: 
