@@ -27,6 +27,7 @@ Example Fields:
 | Content Cell  | Content Cell  |
 
 Mock-up:
+[Google Document with Full Mock Up Design](https://docs.google.com/document/d/1AMpsqILAxU9m1gk5BHLvXyZBKZw0bd1WdMqt6g40nls/edit)
 
 Diagram of database structure:
 
