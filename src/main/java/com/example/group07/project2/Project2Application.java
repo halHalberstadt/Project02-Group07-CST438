@@ -10,11 +10,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @SpringBootApplication
 public class Project2Application {
 
+    /**
+     * Landing page (When someone is not logged in)
+     */
     @RequestMapping("/")
     @ResponseBody
     String home() {
-        return "Something else!";
+        return "Landing page!";
     }
+
 
     public static void main(String[] args) {
         SpringApplication.run(Project2Application.class, args);
