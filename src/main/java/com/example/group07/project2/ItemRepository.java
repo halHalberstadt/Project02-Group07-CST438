@@ -10,5 +10,4 @@ import org.springframework.data.repository.CrudRepository;
  * We will have an empty interface and it will work
  */
 public interface ItemRepository extends CrudRepository<Item, Integer> {
-
 }
