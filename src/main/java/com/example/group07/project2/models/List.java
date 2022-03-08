@@ -1,4 +1,4 @@
-package com.example.group07.project2;
+package com.example.group07.project2.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

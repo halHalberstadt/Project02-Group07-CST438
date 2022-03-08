@@ -1,5 +1,7 @@
-package com.example.group07.project2;
+package com.example.group07.project2.apis;
 
+import com.example.group07.project2.models.User;
+import com.example.group07.project2.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

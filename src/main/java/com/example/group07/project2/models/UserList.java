@@ -1,22 +1,19 @@
-package com.example.group07.project2;
+package com.example.group07.project2.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- * We are creating a User entity that represents
- * a user in our database. This is similar to a room database
- */
 @Entity
-public class User {
+public class UserList {
+
     @Id // this is our primary key
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer userId;
 
-    private String username;
-    private String password;
+    String title;
+    String description;
 
     /**
      * Getters and Setters for our private variables
@@ -30,19 +27,23 @@ public class User {
         this.userId = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getTitle() {
+        return title;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getPassword() {
-        return password;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setList(String list) {
+        this.title=list;
     }
 }

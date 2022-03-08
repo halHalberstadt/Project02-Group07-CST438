@@ -1,5 +1,6 @@
-package com.example.group07.project2;
+package com.example.group07.project2.repos;
 
+import com.example.group07.project2.models.Item;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -9,6 +10,6 @@ import org.springframework.data.repository.CrudRepository;
  * and the ID that we use to uniquely identify that this is a repository, (Integer)
  * We will have an empty interface and it will work
  */
-public interface UserRepository extends CrudRepository<User, Integer> {
+public interface ItemRepository extends CrudRepository<Item, Integer> {
 
 }

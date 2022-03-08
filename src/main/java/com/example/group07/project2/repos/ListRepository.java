@@ -1,5 +1,6 @@
-package com.example.group07.project2;
+package com.example.group07.project2.repos;
 
+import com.example.group07.project2.models.List;
 import org.springframework.data.repository.CrudRepository;
 
 /**
