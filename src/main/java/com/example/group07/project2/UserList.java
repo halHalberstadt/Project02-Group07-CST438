@@ -4,38 +4,46 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+/**
+ * We are creating a UserList entity that represents
+ * the list created by the user
+ */
 @Entity
 public class UserList {
     @Id // this is our primary key
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer userListID;
+    private Integer userListId;
 
-    private Integer userID;
-    private String List;
+    private Integer userId;
+    private String list;
 
 
-    public Integer getUserListID() {
-        return userListID;
+    /**
+     * Getters and Setters for our private variables
+     * This is the data we will be inserting into our entity
+     */
+    public Integer getUserListId() {
+        return userListId;
     }
 
-    public void setUserListID(Integer userListID) {
-        this.userListID = userListID;
+    public void setUserListId(Integer userListId) {
+        this.userListId = userListId;
     }
 
-    public Integer getUserID() {
-        return userID;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserID(Integer userID) {
-        this.userID = userID;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getList() {
-        return List;
+        return list;
     }
 
     public void setList(String list) {
-        List = list;
+        this.list = list;
     }
-
 }
