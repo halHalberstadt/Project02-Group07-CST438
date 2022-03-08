@@ -5,6 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * We are creating a UserList entity that represents
+ * a user list in our database. This is used to sort
+ * the lists that the user wants.
+ */
 @Entity
 public class UserList {
 
