@@ -16,7 +16,8 @@ public class Project2Application {
     @RequestMapping("/")
     @ResponseBody
     String home() {
-        return "Landing page!";
+        return "Landing page!\n We have the following endpoints:\n/itemApi/allItems\n/userApi/allUsers\n/userApi/findByName\n/userListApi/allUserList" +
+                "\n/wishListApi/allWishList";
     }
 
 
