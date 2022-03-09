@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Entry point for our API. This is how we will obtain our user data
  */
@@ -42,6 +44,12 @@ public class UserApi {
 
         userRepository.save(user);
 
-        return "Saved!";
+        return "Saved User!";
+    }
+
+    @GetMapping(path="/findByName")
+    public @ResponseBody
+    List<User> findUserByName(@RequestParam (defaultValue = "daisy") String name) {
+        return userRepository.findUserByName(name);
     }
 }
