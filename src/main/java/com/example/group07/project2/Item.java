@@ -23,6 +23,9 @@ public class Item {
     private Integer itemQuantity;
     private String itemImage;
 
+//    private String url;
+//    private String imageUrl;
+
 
     /**
      * Getters and Setters for our private variables
