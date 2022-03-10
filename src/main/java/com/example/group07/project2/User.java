@@ -15,13 +15,23 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer userId;
 
+    private String name;
     private String username;
     private String password;
+
 
     /**
      * Getters and Setters for our private variables
      * This is the data we will be inserting into our entity
      */
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Integer getUserId() {
         return userId;
     }
