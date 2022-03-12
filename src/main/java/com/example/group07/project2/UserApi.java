@@ -1,6 +1,7 @@
 package com.example.group07.project2;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,5 +52,51 @@ public class UserApi {
     public @ResponseBody
     List<User> findUserByName(@RequestParam (defaultValue = "daisy") String name) {
         return userRepository.findUserByName(name);
+    }
+
+    /**
+     * deleteUser:
+     * deletes user from db table.
+     * TODO: add admin restriction/ from that same user
+     */
+    @GetMapping("/deleteUser")
+    @ResponseBody
+    public String deleteUser(@RequestParam @NonNull Integer userID) {
+        String userName;
+        for(User currUser: userRepository.findAll()){
+            if(currUser.getUserId().equals(userID)){
+                userName = currUser.getUsername();
+                userRepository.delete(currUser);
+                return "Item: " + userName + " with ID:" + userID + " was found and deleted.";
+            }
+        }
+
+        return "Item with ID: " + userID + " was not found and could not be deleted.";
+    }
+
+    /**
+     * UpdateUser:
+     * this updates the fields of a User on the system.
+     * TODO: add admin restriction/ from that same user
+     */
+    @GetMapping("/UpdateUser")
+    public @ResponseBody String UpdateUser(@RequestParam Integer userID,
+                                           @RequestParam(required = false) String username,
+                                           @RequestParam(required = false) String password) {
+        for(User currUser: userRepository.findAll()){
+            if(currUser.getUserId().equals(userID)){
+                if(!username.isBlank())
+                    currUser.setUsername(username);
+
+                if(!password.isBlank())
+                    currUser.setPassword(password);
+
+                userRepository.save(currUser);
+
+                return "User: " + currUser.getUsername() + " with ID:" + userID + " was found and updated.";
+            }
+        }
+
+        return "User with ID: " + userID + " was not found and could not be updated.";
     }
 }
