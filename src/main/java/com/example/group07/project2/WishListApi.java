@@ -1,6 +1,7 @@
 package com.example.group07.project2;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,5 +44,51 @@ public class WishListApi {
         wishListRepository.save(list);
 
         return "new list Added!";
+    }
+
+    /**
+     * deleteListItem:
+     * removes an Item from a list, but not the system.
+     * (disconnecting the link)
+     * TODO: add admin restriction/ from that same user
+     */
+    @GetMapping("/deleteItemList")
+    public @ResponseBody String deleteWishList (@RequestParam @NonNull Integer userListID, @RequestParam @NonNull Integer listID) {
+        for(WishList currList: wishListRepository.findAll()){
+            if(currList.getUserListId().equals(userListID) && currList.getListId().equals(listID)){
+                wishListRepository.delete(currList);
+            }
+        }
+        return "Success!";
+    }
+
+    /**
+     * UpdateItemList:
+     * this updates the fields of a User on the system.
+     * TODO: add admin restriction/ from that same user
+     */
+    @GetMapping("/UpdateItemList")
+    public @ResponseBody String UpdateWishList(@RequestParam Integer listId,
+                                               @RequestParam(required = false) String userListId,
+                                               @RequestParam(required = false) String listName,
+                                               @RequestParam(required = false) String listDescription) {
+        for(WishList currItemList: wishListRepository.findAll()){
+            if(currItemList.getListId().equals(listId)){
+                if(!userListId.isBlank())
+                    currItemList.setUserListId(Integer.getInteger(userListId));
+
+                if(!listName.isBlank())
+                    currItemList.setListName(listName);
+
+                if(!listDescription.isBlank())
+                    currItemList.setListDescription(listDescription);
+
+                wishListRepository.save(currItemList);
+
+                return "ItemList: " + currItemList.getListName() + " with ID:" + listId + " was found and updated.";
+            }
+        }
+
+        return "ItemList with ID: " + listId + " was not found and could not be updated.";
     }
 }
