@@ -30,6 +30,19 @@ public class WishListApi {
     }
 
     /**
+     * This path will return just the user from the id in the url,
+     * or returns null.
+     */
+    @GetMapping(path = "/getWishList")
+    public @ResponseBody WishList getWishList(@RequestParam @NonNull Integer id) {
+        for(WishList i:wishListRepository.findAll()){
+            if(i.getListId().equals(id))
+                return i;
+        }
+        return null;
+    }
+
+    /**
      * This PostMapping will allow us to add lists to our
      * database entity
      *

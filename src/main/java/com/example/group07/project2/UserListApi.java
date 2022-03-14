@@ -30,6 +30,19 @@ public class UserListApi {
     }
 
     /**
+     * This path will return just the user from the id in the url,
+     * or returns null.
+     */
+    @GetMapping(path = "/getUserList")
+    public @ResponseBody UserList getUserList(@RequestParam @NonNull Integer id) {
+        for(UserList i:userListRepository.findAll()){
+            if(i.getUserId().equals(id))
+                return i;
+        }
+        return null;
+    }
+
+    /**
      * This PostMapping will allow us to add users to our
      * database entity
      *

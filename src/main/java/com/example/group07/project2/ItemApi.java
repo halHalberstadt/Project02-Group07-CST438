@@ -5,6 +5,8 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 /**
  * Entry point for our API. This is how we will obtain our user data
  */
@@ -28,6 +30,19 @@ public class ItemApi {
     @GetMapping(path = "/allItems")
     public @ResponseBody Iterable<Item> getAllItems() {
         return itemRepository.findAll();
+    }
+
+    /**
+     * This path will return just the item from the id in the url,
+     * or returns null.
+     */
+    @GetMapping(path = "/getItem")
+    public @ResponseBody Item getItem(@RequestParam @NonNull Integer id) {
+        for(Item i:itemRepository.findAll()){
+            if(i.getItemId().equals(id))
+                return i;
+        }
+        return null;
     }
 
     /**
@@ -76,7 +91,7 @@ public class ItemApi {
      * TODO: add admin restriction/ from that same user
      */
     @GetMapping("/UpdateItem")
-    public @ResponseBody String UpdateItem(@RequestParam Integer itemID,
+    public @ResponseBody String updateItem(@RequestParam Integer itemID,
                                            @RequestParam(required = false) String listId,
                                            @RequestParam(required = false) String itemName,
                                            @RequestParam(required = false) String itemDescription,

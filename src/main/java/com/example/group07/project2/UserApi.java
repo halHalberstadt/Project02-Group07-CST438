@@ -48,6 +48,19 @@ public class UserApi {
         return "Saved User!";
     }
 
+    /**
+     * This path will return just the user from the id in the url,
+     * or returns null.
+     */
+    @GetMapping(path = "/getUser")
+    public @ResponseBody User getUser(@RequestParam @NonNull Integer id) {
+        for(User i:userRepository.findAll()){
+            if(i.getUserId().equals(id))
+                return i;
+        }
+        return null;
+    }
+
     @GetMapping(path="/findByName")
     public @ResponseBody
     List<User> findUserByName(@RequestParam (defaultValue = "daisy") String name) {
