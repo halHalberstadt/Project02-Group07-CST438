@@ -6,7 +6,12 @@
     <link th:href="@{/css/main.css}" rel="stylesheet" />
 </head>
 <body>
+    <ul>
+        <th:block th:each="user : ${users}">
+            <li th:utext="${'Name: ' + user.name + ' Username: ' + user.username}">..</li>
 
-<h1> Welcome Home! </h1>
+        </th:block>
+    </ul>
+
 </body>
 </html>
