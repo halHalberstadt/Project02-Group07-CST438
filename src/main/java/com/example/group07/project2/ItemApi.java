@@ -44,7 +44,7 @@ public class ItemApi {
         item.setItemCategory(itemCategory);
         item.setItemPrice(itemPrice);
         item.setItemQuantity(itemQuantity);
-        item.setItemImage(itemImage);
+        item.setImageUrl(itemImage);
 
         itemRepository.save(item);
 
@@ -105,7 +105,7 @@ public class ItemApi {
                     currItem.setItemQuantity(Integer.getInteger(itemQuantity));
 
                 if(!itemImage.isBlank())
-                    currItem.setItemImage(itemImage);
+                    currItem.setImageUrl(itemImage);
 
                 itemRepository.save(currItem);
 
@@ -115,4 +115,6 @@ public class ItemApi {
 
         return "User with ID: " + itemID + " was not found and could not be updated.";
     }
+
+
 }

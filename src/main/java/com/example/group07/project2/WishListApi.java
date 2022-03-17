@@ -39,7 +39,6 @@ public class WishListApi {
     public @ResponseBody String addList (@RequestParam String listName, @RequestParam String listDescription) {
         WishList list = new WishList();
         list.setListName(listName);
-        list.setListDescription(listDescription);
 
         wishListRepository.save(list);
 
@@ -55,7 +54,7 @@ public class WishListApi {
     @GetMapping("/deleteItemList")
     public @ResponseBody String deleteWishList (@RequestParam @NonNull Integer userListID, @RequestParam @NonNull Integer listID) {
         for(WishList currList: wishListRepository.findAll()){
-            if(currList.getUserListId().equals(userListID) && currList.getListId().equals(listID)){
+            if(currList.getListId().equals(userListID) && currList.getListId().equals(listID)){
                 wishListRepository.delete(currList);
             }
         }
@@ -75,13 +74,13 @@ public class WishListApi {
         for(WishList currItemList: wishListRepository.findAll()){
             if(currItemList.getListId().equals(listId)){
                 if(!userListId.isBlank())
-                    currItemList.setUserListId(Integer.getInteger(userListId));
+                    currItemList.setListId(Integer.getInteger(userListId));
 
                 if(!listName.isBlank())
                     currItemList.setListName(listName);
 
-                if(!listDescription.isBlank())
-                    currItemList.setListDescription(listDescription);
+//                if(!listDescription.isBlank())
+//                    currItemList.setListDescription(listDescription);
 
                 wishListRepository.save(currItemList);
 
