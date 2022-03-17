@@ -33,10 +33,18 @@ public class WishListApi {
      * This path will return just the user from the id in the url,
      * or returns null.
      */
-    @GetMapping(path = "/getWishList")
-    public @ResponseBody WishList getWishList(@RequestParam @NonNull Integer id) {
+    @GetMapping(path = "/getWishListById")
+    public @ResponseBody WishList getWishListById(@RequestParam @NonNull Integer id) {
         for(WishList i:wishListRepository.findAll()){
             if(i.getListId().equals(id))
+                return i;
+        }
+        return null;
+    }
+    @GetMapping(path = "/getWishListByName")
+    public @ResponseBody WishList getWishListByName(@RequestParam @NonNull String name) {
+        for(WishList i:wishListRepository.findAll()){
+            if(i.getListName().equals(name))
                 return i;
         }
         return null;
@@ -48,7 +56,7 @@ public class WishListApi {
      *
      * Literally this is all we need to add stuff to our database
      */
-    @PostMapping(path="/addWishList")
+    @GetMapping(path="/addWishList")
     public @ResponseBody String addList (@RequestParam String listName, @RequestParam String listDescription) {
         WishList list = new WishList();
         list.setListName(listName);
@@ -65,7 +73,7 @@ public class WishListApi {
      * (disconnecting the link)
      * TODO: add admin restriction/ from that same user
      */
-    @GetMapping("/deleteItemList")
+    @GetMapping("/deleteWishList")
     public @ResponseBody String deleteWishList (@RequestParam @NonNull Integer userListID, @RequestParam @NonNull Integer listID) {
         for(WishList currList: wishListRepository.findAll()){
             if(currList.getUserListId().equals(userListID) && currList.getListId().equals(listID)){
@@ -80,8 +88,8 @@ public class WishListApi {
      * this updates the fields of a User on the system.
      * TODO: add admin restriction/ from that same user
      */
-    @GetMapping("/UpdateItemList")
-    public @ResponseBody String UpdateWishList(@RequestParam Integer listId,
+    @GetMapping("/updateWishList")
+    public @ResponseBody String updateWishList(@RequestParam Integer listId,
                                                @RequestParam(required = false) String userListId,
                                                @RequestParam(required = false) String listName,
                                                @RequestParam(required = false) String listDescription) {

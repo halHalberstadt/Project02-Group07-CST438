@@ -33,13 +33,26 @@ public class UserListApi {
      * This path will return just the user from the id in the url,
      * or returns null.
      */
-    @GetMapping(path = "/getUserList")
-    public @ResponseBody UserList getUserList(@RequestParam @NonNull Integer id) {
+    @GetMapping(path = "/getUserListById")
+    public @ResponseBody String getUserListById(@RequestParam @NonNull Integer id) {
         for(UserList i:userListRepository.findAll()){
-            if(i.getUserId().equals(id))
-                return i;
+            if(i.getUserListId().equals(id))
+                return "UserListId:" + i.getUserListId() +
+                        "listId: " + i.getUserId() + "," +
+                        "list: " + i.getList() + "";
         }
-        return null;
+        return "UserList not found.";
+    }
+
+    @GetMapping(path = "/getUserListByTitle")
+    public @ResponseBody String getUserListByTitle(@RequestParam @NonNull String title) {
+        for(UserList i:userListRepository.findAll()){
+            if(i.getList().equals(title))
+                return "UserListId:" + i.getUserListId() +
+                        "listId: " + i.getUserId() + "," +
+                        "list: " + i.getList() + "";
+        }
+        return "UserList not found.";
     }
 
     /**
@@ -52,8 +65,8 @@ public class UserListApi {
      * the id is our primary key and the userId is a foreign key, so I don't think
      * we set it. I'll need to find out about it!!
      */
-    @PostMapping(path="/addList")
-    public @ResponseBody String addList (@RequestParam String list) {
+    @GetMapping(path="/addList")
+    public @ResponseBody String addList (@RequestParam @NonNull String list) {
         UserList userList = new UserList();
         userList.setList(list);
 
@@ -73,12 +86,12 @@ public class UserListApi {
         String userListName = "";
         for(UserList currList: userListRepository.findAll()){
             if(currList.getUserId().equals(userID) && currList.getUserId().equals(userID)) {
-                userListName=currList.getList();
                 userListRepository.delete(currList);
+                return "UserList was deleted.";
             }
         }
 
-        return "List: " + userListName + " with ID: " + userListID + " was not found and could not be deleted.";
+        return "UserList: " + userListName + " with ID: " + userListID + " was not found and could not be deleted.";
     }
 
     /**
@@ -86,8 +99,8 @@ public class UserListApi {
      * this updates the fields of a UpdateUserList on the system.
      * TODO: add admin restriction/ from that same user
      */
-    @GetMapping("/UpdateUserList")
-    public @ResponseBody String UpdateUserList(@RequestParam Integer userListId,
+    @GetMapping("/updateUserList")
+    public @ResponseBody String updateUserList(@RequestParam Integer userListId,
                                                @RequestParam(required = false) String userId,
                                                @RequestParam(required = false) String list) {
         for(UserList currUserList: userListRepository.findAll()){

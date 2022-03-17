@@ -18,10 +18,9 @@ public class ItemTests {
     @Autowired
     private TestRestTemplate restTemplate;
 
-
     @Test
     @Order(1)
-    void addItem() {
+    void addItem() throws Exception  {
         /** Testing for an existing item*/
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/itemApi/addItem?itemName=crumpled soda can&itemDescription=it's garbage, fun!&itemCategory=garbage&itemPrice=$0.25&itemQuantity=1&itemImage=https://thumbs.dreamstime.com/z/red-crushed-soda-can-empty-smashed-pop-isolated-white-background-71920441.jpg",
                 String.class)).contains("item already in database or is missing fields.");
@@ -47,7 +46,7 @@ public class ItemTests {
     }
 
     @Test
-    void updateItem() {
+    void updateItem() throws Exception  {
         /** Testing for a entry that doesn't exist */
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/itemApi/updateItem?itemID=1&listId&itemName=crumpled soda can&itemDescription=it's garbage, fun!&itemCategory&itemPrice=$0.25&itemQuantity&itemImage",
                 String.class)).contains("The Item was not found and could not be updated.");
@@ -58,7 +57,7 @@ public class ItemTests {
 
     @Test
     @Order(2)
-    void deleteItem(){
+    void deleteItem() throws Exception {
         /** Testing for an absent id*/
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/itemApi/deleteItemByName?name=test4delete",
                 String.class)).contains("Item with name: test4delete was not found and could not be deleted.");

@@ -37,7 +37,7 @@ public class UserApi {
      *
      * Literally this is all we need to add stuff to our database
      */
-    @PostMapping(path="/addUser")
+    @GetMapping(path="/addUser")
     public @ResponseBody String addUser (@RequestParam String username, @RequestParam String password) {
         User user = new User();
         user.setUsername(username);
@@ -52,8 +52,8 @@ public class UserApi {
      * This path will return just the user from the id in the url,
      * or returns null.
      */
-    @GetMapping(path = "/getUser")
-    public @ResponseBody User getUser(@RequestParam @NonNull Integer id) {
+    @GetMapping(path = "/getUserById")
+    public @ResponseBody User getUserById(@RequestParam @NonNull Integer id) {
         for(User i:userRepository.findAll()){
             if(i.getUserId().equals(id))
                 return i;
@@ -92,8 +92,8 @@ public class UserApi {
      * this updates the fields of a User on the system.
      * TODO: add admin restriction/ from that same user
      */
-    @GetMapping("/UpdateUser")
-    public @ResponseBody String UpdateUser(@RequestParam Integer userID,
+    @GetMapping("/updateUser")
+    public @ResponseBody String updateUser(@RequestParam Integer userID,
                                            @RequestParam(required = false) String username,
                                            @RequestParam(required = false) String password) {
         for(User currUser: userRepository.findAll()){

@@ -1,13 +1,28 @@
 package com.example.group07.project2;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
 
-@SpringBootTest
+import static org.assertj.core.api.Assertions.assertThat;
+import static com.example.group07.project2.Project2Application.HOME_MESSAGE;
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class Project2ApplicationTests {
 
+    @LocalServerPort
+    private int port;
+
+    @Autowired
+    private TestRestTemplate restTemplate;
+
     @Test
-    void contextLoads() {
+    void correctHomeMessage()  throws Exception {
+        /** Testing for the correct base response at the home page */
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
+                String.class)).contains(HOME_MESSAGE);
     }
 
 }
