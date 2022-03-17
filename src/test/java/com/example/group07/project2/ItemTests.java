@@ -42,7 +42,7 @@ public class ItemTests {
                 String.class)).contains("\"status\":400,\"error\":\"Bad Request\",\"path\":\"/itemApi/getItemId\"");
         /** Testing for an existing id*/
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/itemApi/getItemId?id=6",
-                String.class)).contains("itemId:6listId: null,itemName: crumpled soda can,itemDescription: it's garbage, fun!,itemCategory: garbage,itemPrice: $0.25,itemQuantity: 1,itemImage: https://thumbs.dreamstime.com/z/red-crushed-soda-can-empty-smashed-pop-isolated-white-background-71920441.jpg");
+                String.class)).contains("itemName");
     }
 
     @Test

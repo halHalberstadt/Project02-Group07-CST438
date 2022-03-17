@@ -54,10 +54,10 @@ public class UserListTests {
     void updateUserList() {
         /** Testing for a entry that doesn't exist */
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/userListApi/updateUserList?userListId=523&userId=222&list=yes",
-                String.class)).contains("was found and updated.");
+                String.class)).contains("was not found and could not be updated.");
         /** Testing for regular updating */
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/userListApi/updateUserList?userListId=" + userListId + "&userId=69&list=",
-                String.class)).contains("was not found and could not be updated.");
+                String.class)).contains("was found and updated.");
     }
 
     @Test

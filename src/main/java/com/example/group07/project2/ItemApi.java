@@ -39,14 +39,14 @@ public class ItemApi {
     public @ResponseBody String getItemId(@RequestParam @NonNull Integer id) {
         for(Item i:itemRepository.findAll()){
             if(i.getItemId().equals(id))
-                return "itemId:" + id +
-                    "listId: " + i.getListId() + "," +
-                    "itemName: " + i.getItemName() + "," +
-                    "itemDescription: " + i.getItemDescription() + "," +
-                    "itemCategory: " + i.getItemCategory() + "," +
-                    "itemPrice: " + i.getItemPrice() + "," +
-                    "itemQuantity: " + i.getItemQuantity() + "," +
-                    "itemImage: " + i.getItemImage() + "";
+                return "{\n\titemId:" + id +
+                    "\n\tlistId: " + i.getListId() + "," +
+                    "\n\titemName: \"" + i.getItemName() + "\"," +
+                    "\n\titemDescription: \"" + i.getItemDescription() + "\"," +
+                    "\n\titemCategory: \"" + i.getItemCategory() + "\"," +
+                    "\n\titemPrice: \"" + i.getItemPrice() + "\"," +
+                    "\n\titemQuantity: " + i.getItemQuantity() + "," +
+                    "\n\titemImage: \"" + i.getItemImage() + "\"\n}";
         }
         return "Item not found.";
     }
