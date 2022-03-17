@@ -12,7 +12,6 @@ import java.util.Objects;
  */
 @Controller
 @RequestMapping(path="/itemApi")
-
 public class ItemApi {
 
     /**
@@ -36,13 +35,20 @@ public class ItemApi {
      * This path will return just the item from the id in the url,
      * or returns null.
      */
-    @GetMapping(path = "/getItem")
-    public @ResponseBody Item getItem(@RequestParam @NonNull Integer id) {
+    @GetMapping(path = "/getItemId")
+    public @ResponseBody String getItemId(@RequestParam @NonNull Integer id) {
         for(Item i:itemRepository.findAll()){
             if(i.getItemId().equals(id))
-                return i;
+                return "itemId:" + id +
+                    "listId: " + i.getListId() + "," +
+                    "itemName: " + i.getItemName() + "," +
+                    "itemDescription: " + i.getItemDescription() + "," +
+                    "itemCategory: " + i.getItemCategory() + "," +
+                    "itemPrice: " + i.getItemPrice() + "," +
+                    "itemQuantity: " + i.getItemQuantity() + "," +
+                    "itemImage: " + i.getItemImage() + "";
         }
-        return null;
+        return "Item not found.";
     }
 
     /**
@@ -51,19 +57,30 @@ public class ItemApi {
      *
      * Literally this is all we need to add stuff to our database
      */
-    @PostMapping(path="/addItem")
-    public @ResponseBody String addItem (@RequestParam String itemName, @RequestParam String itemDescription, @RequestParam String itemCategory, @RequestParam String itemPrice, @RequestParam Integer itemQuantity, @RequestParam String itemImage) {
+    @GetMapping(path="/addItem")
+    public @ResponseBody String addItem (@RequestParam @NonNull String itemName, @RequestParam @NonNull String itemDescription, @RequestParam @NonNull String itemCategory, @RequestParam String itemPrice, @RequestParam String itemQuantity, @RequestParam String itemImage) {
         Item item = new Item();
         item.setItemName(itemName);
         item.setItemDescription(itemDescription);
         item.setItemCategory(itemCategory);
         item.setItemPrice(itemPrice);
-        item.setItemQuantity(itemQuantity);
+        item.setItemQuantity(Integer.getInteger(itemQuantity));
         item.setItemImage(itemImage);
 
-        itemRepository.save(item);
-
-        return "new item Added!";
+        boolean canSave = true;
+        for (Item i:
+             itemRepository.findAll()) {
+            if(i.getItemName().equals(item.getItemName()) &&
+                    i.getItemDescription().equals(item.getItemDescription()) &&
+                    i.getItemCategory().equals(item.getItemCategory())){
+                canSave = false;
+            }
+        }
+        if(canSave) {
+            itemRepository.save(item);
+            return "new item Added!";
+        }
+        return "item already in database or is missing fields.";
     }
 
     /**
@@ -71,18 +88,27 @@ public class ItemApi {
      * Deletes item off of the db.
      * TODO: add admin restriction
      */
-    @GetMapping("/deleteItem")
-    public @ResponseBody String deleteItem(@RequestParam @NonNull Integer itemID) {
-        String itemName;
+    @GetMapping("/deleteItemById")
+    public @ResponseBody String deleteItemById(@RequestParam @NonNull Integer itemID) {
         for(Item currItem: itemRepository.findAll()){
             if(currItem.getItemId().equals(itemID)){
-                itemName = currItem.getItemName();
                 itemRepository.delete(currItem);
-                return "Item: " + itemName + " with ID:" + itemID + " was found and deleted.";
+                return "Item with ID:" + itemID + " was found and deleted.";
             }
         }
 
         return "Item with ID: " + itemID + " was not found and could not be deleted.";
+    }
+    @GetMapping("/deleteItemByName")
+    public @ResponseBody String deleteItemById(@RequestParam @NonNull String name) {
+        for(Item currItem: itemRepository.findAll()){
+            if(currItem.getItemName().equals(name)){
+                itemRepository.delete(currItem);
+                return "Item: " + name + " was found and deleted.";
+            }
+        }
+
+        return "Item with name: " + name + " was not found and could not be deleted.";
     }
 
     /**
@@ -90,7 +116,7 @@ public class ItemApi {
      * this updates the fields of a User on the system.
      * TODO: add admin restriction/ from that same user
      */
-    @GetMapping("/UpdateItem")
+    @GetMapping("/updateItem")
     public @ResponseBody String updateItem(@RequestParam Integer itemID,
                                            @RequestParam(required = false) String listId,
                                            @RequestParam(required = false) String itemName,
@@ -124,10 +150,10 @@ public class ItemApi {
 
                 itemRepository.save(currItem);
 
-                return "User: " + currItem.getItemName() + " with ID:" + itemID + " was found and updated.";
+                return "The Item was found and updated!";
             }
         }
 
-        return "User with ID: " + itemID + " was not found and could not be updated.";
+        return "The Item was not found and could not be updated.";
     }
 }
