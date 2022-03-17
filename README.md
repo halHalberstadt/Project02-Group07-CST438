@@ -53,4 +53,6 @@ Diagram of database structure:
 
 ### Links<br>
  Resources we found useful:
-   - [test](https://github.com/)
+   - [Baeldung](https://www.baeldung.com/)
+   - [JetBrains](https://www.jetbrains.com/help/idea/http-client-in-product-code-editor.html#composing-http-requests)
+   - [Postman](https://www.postman.com/)
