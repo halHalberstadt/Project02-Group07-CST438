@@ -7,36 +7,31 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous" rel="stylesheet" />
 </head>
-<body>
-<div class="container-fluid text-center">
-    <p> </p>
-    <p> </p>
-    <h1>YourList</h1>
+    <body>
+        <div class="container-fluid text-center">
+            <br>
+            <div class="d-flex justify-content-center">
+                <font size="120px"> <a href="/"> YourList </a> </font>
+            </div>
 
-    <form th:action="@{/signUp}" method="post" style="max-width: 350px; margin: 0 auto;">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                </ol>
+            </nav>
 
-        <div class="border border-primary p-5 rounded">
-            <p> Create an Account </p>
-            <p>
-                <input type="name" name="name" class="form-control" placeholder="Full Name" required autofocus />
-            </p>
-            <p>
-                <input type="username" name="username" class="form-control" placeholder="Username" required />
-            </p>
-            <p>
-                <input type="password" name="password" class="form-control" placeholder="Password" required />
-            </p>
-            <p>
-                <input type="submit" value="Sign Up" class="btn btn-primary" />
-            </p>
+            <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto;">
 
-            <p> Already have an account?</p>
-            <p>
-                <input type="submit" value="Login" class="btn btn-primary" />
-            </p>
+                <div class="border border-primary p-5 rounded">
+                    <h4> Login into your Account </h4>
+                    <p><input type="username" name="username" class="form-control" placeholder="Username" required autofocus/></p>
+                    <p><input type="password" name="password" class="form-control" placeholder="Password" required /></p>
+                    <p><input type="submit" value="Login" class="btn btn-primary" /></p>
+                    <p> Don't have an account?</p>
+                    <p><input type="submit" value="Sign Up" class="btn btn-primary" /></p>
+                </div>
+
+            </form>
         </div>
-
-    </form>
-</div>
-</body>
+    </body>
 </html>
