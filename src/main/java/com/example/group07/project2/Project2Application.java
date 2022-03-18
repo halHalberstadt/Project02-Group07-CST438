@@ -14,10 +14,19 @@ public class Project2Application {
      * Landing page (When someone is not logged in)
      */
     @RequestMapping("/")
-    @ResponseBody
+//    @ResponseBody
     String home() {
-        return "Landing page!\n We have the following endpoints:\n/itemApi/allItems\n/userApi/allUsers\n/userApi/findByName\n/userListApi/allUserList" +
-                "\n/wishListApi/allWishList";
+        return "home";
+    }
+
+    @RequestMapping("/login")
+    String login() {
+        return "login";
+    }
+
+    @RequestMapping("/signUp")
+    String signUp() {
+        return "signUp";
     }
 
 
