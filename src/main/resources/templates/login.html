@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <div th:replace="/fragments/header1 :: ylHeader1"></div>
     <meta charset="UTF-8">
     <title> Login Page</title>
     <link th:href="@{/static/css/main.css}" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -10,22 +11,13 @@
 <body>
 <div class="container-fluid text-center">
     <br>
-    <div class="d-flex justify-content-center">
-        <font size="120px"> <a href="/"> YourList </a> </font>
-    </div>
-
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-        </ol>
-    </nav>
 
     <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto;">
 
         <div class="border border-primary p-5 rounded">
             <h4> Login into your Account </h4>
-            <p><input type="username" name="username" class="form-control" placeholder="Username" required autofocus/></p>
-            <p><input type="password" name="password" class="form-control" placeholder="Password" required /></p>
+            <p><input type="username" name="username" class="form-control" placeholder="Username" /></p>
+            <p><input type="password" name="password" class="form-control" placeholder="Password" /></p>
             <p><input type="submit" value="Login" class="btn btn-primary" /></p>
             <p> Don't have an account?</p>
             <p><input type="submit" value="Sign Up" class="btn btn-primary" /></p>
