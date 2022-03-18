@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 public class FrontEndController {
 
-    public final static String BASE_URI = "http://localhost/8080/api/";
+    public final static String BASE_URI = "http://localhost:8080/api/";
 
     @RequestMapping("/")
     String Home(Model model) {

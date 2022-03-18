@@ -44,7 +44,7 @@ public class ItemApi {
         item.setItemCategory(itemCategory);
         item.setItemPrice(itemPrice);
         item.setItemQuantity(itemQuantity);
-        item.setImageUrl(itemImage);
+        item.setItemImage(itemImage);
 
         itemRepository.save(item);
 
@@ -105,7 +105,7 @@ public class ItemApi {
                     currItem.setItemQuantity(Integer.getInteger(itemQuantity));
 
                 if(!itemImage.isBlank())
-                    currItem.setImageUrl(itemImage);
+                    currItem.setItemImage(itemImage);
 
                 itemRepository.save(currItem);
 
