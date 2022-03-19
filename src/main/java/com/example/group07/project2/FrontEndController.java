@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class FrontEndController {
-//
-//    @RequestMapping("/")
-//    String Home(Model model) {
-//        return "home";
-//    }
+
+    @RequestMapping("/")
+    String Home(Model model) {
+        return "home";
+    }
 
 }
