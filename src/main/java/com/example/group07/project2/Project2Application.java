@@ -10,15 +10,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @SpringBootApplication
 public class Project2Application {
 
-    public static final String HOME_MESSAGE = "Landing page!\n We have the following endpoints:\n/itemApi/allItems\n/userApi/allUsers\n/userApi/findByName\n/userListApi/allUserList" +
-            "\n/wishListApi/allWishLists";
     /**
      * Landing page (When someone is not logged in)
      */
     @RequestMapping("/")
-    @ResponseBody
+//    @ResponseBody
     String home() {
-        return HOME_MESSAGE;
+        return "home";
+    }
+
+    @RequestMapping("/login")
+    String login() {
+        return "login";
+    }
+
+    @RequestMapping("/signUp")
+    String signUp() {
+        return "signUp";
     }
 
 
