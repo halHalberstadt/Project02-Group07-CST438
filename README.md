@@ -11,20 +11,37 @@
 &nbsp;&nbsp;&nbsp; Our project foucuses on making an API called 'YourList' that displays wishlist information for users. Our API will have multiple webpages, users and a database of values that the user can interact with. 
 
 ### Example response:<br>
-&nbsp;&nbsp;&nbsp; Here is an example response from the API in (insert) format: 
+&nbsp;&nbsp;&nbsp; Here is an example response from the API in JSON format: 
 
 ```
-test
+{
+ itemId: 6,
+ listId: null,
+ itemName: "crumpled soda can",
+ itemDescription: "it's garbage, fun!",
+ itemCategory: "garbage",
+ itemPrice: "$0.25",
+ itemQuantity: 1,
+ itemImage: "https://thumbs.dreamstime.com/z/red-crushed-soda-can-empty-smashed-pop-isolated-white-background-71920441.jpg"
+}
 ```
 
 ### Useful Information:<br>
 
-Example Fields:
+Example database Fields: (for the Item table)
 
-| Field  | Example Values |
+| Field  | Value Types |
 | ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+| itemId  | int |
+| listId  | int  |
+| itemName  | String  |
+| itemDescription  | String  |
+| itemCategory  | String  |
+| itemPrice  | String  |
+| itemQuantity  | int  |
+| itemImage  | String  |
+
+Note: Price is a string to preserve the currency symbol.
 
 Mock-up:
 [Google Document with Full Mock Up Design](https://docs.google.com/document/d/1AMpsqILAxU9m1gk5BHLvXyZBKZw0bd1WdMqt6g40nls/edit)
@@ -36,4 +53,6 @@ Diagram of database structure:
 
 ### Links<br>
  Resources we found useful:
-   - [test](https://github.com/)
+   - [Baeldung](https://www.baeldung.com/)
+   - [JetBrains](https://www.jetbrains.com/help/idea/http-client-in-product-code-editor.html#composing-http-requests)
+   - [Postman](https://www.postman.com/)
