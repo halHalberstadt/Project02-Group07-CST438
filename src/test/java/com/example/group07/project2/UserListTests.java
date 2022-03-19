@@ -16,58 +16,58 @@ public class UserListTests {
     @LocalServerPort
     private int port;
 
-    private int userListId;
-
     @Autowired
     private TestRestTemplate restTemplate;
 
     @Test
     @Order(1)
-    void addUserList() {
-        /** Testing for an existing item*/
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/userListApi/addList?list=testUserList",
-                String.class)).contains("Saved!");
+    void addUserList() throws Exception {
         /** Testing for all empty entries*/
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/userListApi/addList?list=",
-                String.class)).contains("\"status\":405,\"error\":\"Method Not Allowed\",\"path\":\"/userListApi/addList\"");
+                String.class)).contains("unable to create list.");
         /** Testing for regular creation*/
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/userListApi/addList?list=testUserList",
-                String.class)).contains("\"status\":405,\"error\":\"Method Not Allowed\",\"path\":\"/userListApi/addList\"");
+                String.class)).contains("Saved!");
     }
 
     @Test
     @Order(2)
-    void getUserList() {
+    void getUserList() throws Exception {
         /** Testing for an absent id*/
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/userListApi/getUserListByTitle?title=notExisting",
                 String.class)).contains("UserList not found.");
         /** Testing for an existing id*/
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/userListApi/getUserListByTitle?title=testUserList",
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/userListApi/getUserListByTitle?title=testUserListUp",
                 String.class)).contains("UserListId:");
-        /** grabbing id for the list for future calls */
-        String returnedString = this.restTemplate.getForObject("http://localhost:" + port + "/userListApi/getUserListByTitle?title=testUserList", String.class);
-        userListId = Integer.getInteger(returnedString.substring(returnedString.indexOf("Id:"), returnedString.indexOf("listI")));
     }
 
     @Test
     @Order(3)
-    void updateUserList() {
+    void updateUserList() throws Exception {
+        /** grabbing id for the list */
+        String returnedString = this.restTemplate.getForObject("http://localhost:" + port + "/userListApi/getUserListByTitle?title=testUserList", String.class);
+        String toInt = (returnedString.substring(returnedString.indexOf(":")+2,returnedString.indexOf(",")));
+        int userListId = Integer.parseInt(toInt);
         /** Testing for a entry that doesn't exist */
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/userListApi/updateUserList?userListId=523&userId=222&list=yes",
                 String.class)).contains("was not found and could not be updated.");
         /** Testing for regular updating */
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/userListApi/updateUserList?userListId=" + userListId + "&userId=69&list=",
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/userListApi/updateUserList?userListId="+userListId+"&userId=69&list=testUserListUp",
                 String.class)).contains("was found and updated.");
     }
 
     @Test
-    @Order(3)
-    void deleteUserList() {
+    @Order(4)
+    void deleteUserList() throws Exception {
+        /** grabbing id for the list */
+        String returnedString = this.restTemplate.getForObject("http://localhost:" + port + "/userListApi/getUserListByTitle?title=testUserListUp", String.class);
+        String toInt = (returnedString.substring(returnedString.indexOf(":")+2,returnedString.indexOf(",")));
+        int userListId = Integer.parseInt(toInt);
         /** Testing for an absent id*/
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/userListApi/deleteUserList?userListID=&userID=",
-                String.class)).contains("was not found and could not be deleted.");
+                String.class)).contains("\"status\":400,\"error\":\"Bad Request\",\"path\":\"/userListApi/deleteUserList\"");
         /** Testing for an existing name*/
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/userListApi/deleteUserList?userListID=" + userListId + "userID=69",
-                String.class)).contains("UserList was deleted");
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/userListApi/deleteUserList?userListID="+userListId+"&userID=69",
+                String.class)).contains("was deleted");
     }
 }

@@ -12,6 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ItemTests {
 
+    private int itemId;
+
     @LocalServerPort
     private int port;
 
@@ -20,7 +22,7 @@ public class ItemTests {
 
     @Test
     @Order(1)
-    void addItem() throws Exception  {
+    void addItem() throws Exception {
         /** Testing for an existing item*/
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/itemApi/addItem?itemName=crumpled soda can&itemDescription=it's garbage, fun!&itemCategory=garbage&itemPrice=$0.25&itemQuantity=1&itemImage=https://thumbs.dreamstime.com/z/red-crushed-soda-can-empty-smashed-pop-isolated-white-background-71920441.jpg",
                 String.class)).contains("item already in database or is missing fields.");
@@ -34,6 +36,10 @@ public class ItemTests {
 
     @Test
     public void getItem() throws Exception {
+        /** grabbing id for the list for future calls */
+        String returnedString = this.restTemplate.getForObject("http://localhost:" + port + "/userListApi/getUserListByTitle?title=testUserList", String.class);
+        String toInt = (returnedString.substring(returnedString.indexOf(":")+2,returnedString.indexOf(",")-1));
+        itemId = Integer.parseInt(toInt);
         /** Testing for an absent id*/
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/itemApi/getItemId?id=1",
                 String.class)).contains("Item not found.");

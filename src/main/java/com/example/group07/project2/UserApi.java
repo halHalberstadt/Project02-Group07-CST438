@@ -38,8 +38,16 @@ public class UserApi {
      * Literally this is all we need to add stuff to our database
      */
     @GetMapping(path="/addUser")
-    public @ResponseBody String addUser (@RequestParam String username, @RequestParam String password) {
+    public @ResponseBody String addUser (@RequestParam @NonNull String username, @RequestParam @NonNull String password) {
         User user = new User();
+        for(User u : userRepository.findAll()) {
+            if (u.getUsername().toString().equals(username))
+                return "username taken!";
+        }
+
+        if(username.isBlank() || password.isBlank())
+            return "Invalid username or password";
+
         user.setUsername(username);
         user.setPassword(password);
 
@@ -50,15 +58,29 @@ public class UserApi {
 
     /**
      * This path will return just the user from the id in the url,
-     * or returns null.
+     * or returns a not found message,
+     * NOTE: password is not shown when grabbed.
      */
     @GetMapping(path = "/getUserById")
-    public @ResponseBody User getUserById(@RequestParam @NonNull Integer id) {
+    public @ResponseBody String getUserById(@RequestParam @NonNull Integer id) {
         for(User i:userRepository.findAll()){
             if(i.getUserId().equals(id))
-                return i;
+                return "UserId: " + i.getUserId() + " , " +
+                        "name: " + i.getName() + " , " +
+                        "username: \"" + i.getUsername() + "\"";
         }
-        return null;
+        return "User not found.";
+    }
+
+    @GetMapping(path = "/getUserByUsername")
+    public @ResponseBody String getUserByUsername(@RequestParam @NonNull String username) {
+        for(User i:userRepository.findAll()){
+            if(i.getUsername().equals(username))
+                return "UserId: " + i.getUserId() + ", " +
+                        "name: " + i.getName() + ", " +
+                        "username: \"" + i.getUsername() + "\"";
+        }
+        return "User not found.";
     }
 
     @GetMapping(path="/findByName")
@@ -93,11 +115,11 @@ public class UserApi {
      * TODO: add admin restriction/ from that same user
      */
     @GetMapping("/updateUser")
-    public @ResponseBody String updateUser(@RequestParam Integer userID,
-                                           @RequestParam(required = false) String username,
-                                           @RequestParam(required = false) String password) {
+    public @ResponseBody String updateUser(@RequestParam @NonNull Integer userID,
+                                           @RequestParam String username,
+                                           @RequestParam String password) {
         for(User currUser: userRepository.findAll()){
-            if(currUser.getUserId().equals(userID)){
+            if(currUser.getUserId().toString().equals(userID.toString())){
                 if(!username.isBlank())
                     currUser.setUsername(username);
 

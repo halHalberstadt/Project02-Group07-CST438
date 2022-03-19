@@ -5,6 +5,8 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 /**
  * Entry point for our API. This is how we will obtain our user data
  */
@@ -34,20 +36,24 @@ public class WishListApi {
      * or returns null.
      */
     @GetMapping(path = "/getWishListById")
-    public @ResponseBody WishList getWishListById(@RequestParam @NonNull Integer id) {
+    public @ResponseBody String getWishListById(@RequestParam @NonNull Integer id) {
         for(WishList i:wishListRepository.findAll()){
             if(i.getListId().equals(id))
-                return i;
+                return "listId: " + i.getListId() + "," +
+                        "userListId: " + i.getUserListId() + "," +
+                        "listName: " + i.getListName() + "";;
         }
-        return null;
+        return "Wishlist not found.";
     }
     @GetMapping(path = "/getWishListByName")
-    public @ResponseBody WishList getWishListByName(@RequestParam @NonNull String name) {
+    public @ResponseBody String getWishListByName(@RequestParam @NonNull String name) {
         for(WishList i:wishListRepository.findAll()){
             if(i.getListName().equals(name))
-                return i;
+                return "listId: " + i.getListId() + "," +
+                        "userListId: " + i.getUserListId() + "," +
+                        "listName: " + i.getListName() + "";;
         }
-        return null;
+        return "Wishlist not found.";
     }
 
     /**
@@ -57,10 +63,22 @@ public class WishListApi {
      * Literally this is all we need to add stuff to our database
      */
     @GetMapping(path="/addWishList")
-    public @ResponseBody String addList (@RequestParam String listName, @RequestParam String listDescription) {
+    public @ResponseBody String addList (@RequestParam @NonNull String listName,
+                                         @RequestParam @NonNull String listDescription,
+                                         @RequestParam @NonNull Integer userListId) {
         WishList list = new WishList();
-        list.setListName(listName);
-        list.setListDescription(listDescription);
+        for(WishList wl : wishListRepository.findAll())
+            if(wl.getUserListId().equals(userListId))
+                if(wl.getListName().equals(listName)) {
+                    return "Create a unique list name.";
+                }
+
+        if(!listName.isBlank())
+            list.setListName(listName);
+        if(!listDescription.isBlank())
+            list.setListDescription(listDescription);
+        if(!userListId.toString().isBlank())
+            list.setUserListId(userListId);
 
         wishListRepository.save(list);
 
@@ -90,13 +108,13 @@ public class WishListApi {
      */
     @GetMapping("/updateWishList")
     public @ResponseBody String updateWishList(@RequestParam Integer listId,
-                                               @RequestParam(required = false) String userListId,
+                                               @RequestParam Integer userListId,
                                                @RequestParam(required = false) String listName,
                                                @RequestParam(required = false) String listDescription) {
         for(WishList currItemList: wishListRepository.findAll()){
             if(currItemList.getListId().equals(listId)){
-                if(!userListId.isBlank())
-                    currItemList.setUserListId(Integer.getInteger(userListId));
+                if(!userListId.toString().isBlank())
+                    currItemList.setUserListId(userListId);
 
                 if(!listName.isBlank())
                     currItemList.setListName(listName);

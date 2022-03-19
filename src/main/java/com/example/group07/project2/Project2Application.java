@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class Project2Application {
 
     public static final String HOME_MESSAGE = "Landing page!\n We have the following endpoints:\n/itemApi/allItems\n/userApi/allUsers\n/userApi/findByName\n/userListApi/allUserList" +
-            "\n/wishListApi/allWishList";
+            "\n/wishListApi/allWishLists";
     /**
      * Landing page (When someone is not logged in)
      */
