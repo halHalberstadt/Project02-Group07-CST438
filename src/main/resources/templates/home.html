@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <div th:replace="/fragments/header :: ylHeader"></div>
-    <meta charset="UTF-8">
-    <title> Home Page</title>
-    <link th:href="@{/static.css/main.css}" rel="stylesheet" />
-</head>
+    <head>
+        <div th:replace="fragments/header :: ylHeader"></div>
+        <meta charset="UTF-8">
+        <title> Home Page</title>
+
+    <!--    I might need to remove the slash in front of the word static-->
+        <link th:href="@{/static.css/main.css}" rel="stylesheet" />
+    </head>
+
     <body>
 
         <h1> Landing page! We have the following endpoints: </h1>
 
-        <p> /itemApi/allItems </p>
-        <p> /userApi/allUsers </p>
-        <p> /userApi/findByName </p>
-        <p> /userListApi/allUserList </p>
-        <p> /wishListApi/allWishList </p>
+<!--                This will display a button which will redirect users to the signup page-->
+        <a href="/signUp">
+            <button>Get Started</button>
+        </a>
 
     </body>
 </html>
