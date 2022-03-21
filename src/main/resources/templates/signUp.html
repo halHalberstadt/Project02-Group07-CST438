@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <div th:replace="/fragments/header1 :: ylHeader1"></div>
+    <div th:replace="fragments/header1 :: ylHeader1"></div>
     <meta charset="UTF-8">
     <title> Login Page</title>
     <link th:href="@{/static/css/main.css}" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous" rel="stylesheet" />
 </head>
-    <body>
-        <div class="container-fluid text-center">
-            <br>
+<body>
+<div class="container-fluid text-center">
+    <br>
 
-            <form  action="#" th:action="@{/userApi/addUser}" th:object="${user}" method="post" style="max-width: 350px; margin: 0 auto;">
+    <!--    Here, we will add a user to our database-->
+    <form  action="#" th:action="@{/userApi/addUser}" th:object="${user}" method="post" style="max-width: 350px; margin: 0 auto;">
 
-                <div class="border border-primary p-5 rounded">
-                    <h4> Create an Account </h4>
+        <div class="border border-primary p-5 rounded">
+            <h4> Create an Account </h4>
 
 
 
-                    <div class="form-group">
-                        <label class="control-label" for="username"> Username </label> <input
-                            id="username" class="form-control" th:name="username" required
-                            autofocus="autofocus" />
-                    </div>
+            <div class="form-group">
+                <label class="control-label" for="username"> Name </label> <input
+                    id="name" class="form-control" th:name="name" required
+                    autofocus="autofocus" />
+            </div>
 
-                    <div class="form-group">
-                        <label class="control-label" for="password"> Password </label> <input
-                            id="password" class="form-control" type="password"
-                            th:name="password" required autofocus="autofocus" />
-                    </div>
-                    <p><input type="submit" value="Sign Up" class="btn btn-primary" /></p>
-                    <p> Already have an account? </p>
-                    <p><input type="submit" value="Login" class="btn btn-primary" /></p>
+            <div class="form-group">
+                <label class="control-label" for="username"> Username </label> <input
+                    id="username" class="form-control" th:name="username" required
+                    autofocus="autofocus" />
+            </div>
 
-                </div>
-
-            </form>
+            <div class="form-group">
+                <label class="control-label" for="password"> Password </label> <input
+                    id="password" class="form-control" type="password"
+                    th:name="password" required autofocus="autofocus" />
+            </div>
+            <p><input type="submit" value="Sign Up" class="btn btn-primary" /></p>
+<!--            <p> Already have an account? </p>-->
+<!--                <p><input value="Login" class="btn btn-primary" /></p>-->
         </div>
-    </body>
+        <p> Already have an account? <a href="/login"> Login </a> </p>
+
+    </form>
+</div>
+</body>
 </html>
