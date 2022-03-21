@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,8 +29,14 @@ public class UserApi {
      * us having to type so much code!
      */
     @GetMapping(path = "/allUsers")
-    public @ResponseBody Iterable<User> getAllUsers() {
-        return userRepository.findAll();
+    public @ResponseBody Iterable<String> getAllUsers() {
+        ArrayList<String> userList = new ArrayList<>();
+        for(User i:userRepository.findAll()){
+            userList.add("UserId: " + i.getUserId() + ", " +
+                    "name: " + i.getName() + ", " +
+                    "username: \"" + i.getUsername() + "\"");
+        }
+        return userList;
     }
 
 
