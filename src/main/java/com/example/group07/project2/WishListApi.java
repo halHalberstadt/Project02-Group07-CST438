@@ -5,6 +5,8 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 /**
  * Entry point for our API. This is how we will obtain our user data
  */
@@ -30,15 +32,55 @@ public class WishListApi {
     }
 
     /**
+     * This path will return just the user from the id in the url,
+     * or returns null.
+     */
+    @GetMapping(path = "/getWishListById")
+    public @ResponseBody String getWishListById(@RequestParam @NonNull Integer id) {
+        for(WishList i:wishListRepository.findAll()){
+            if(i.getListId().equals(id))
+                return "listId: " + i.getListId() + "," +
+                        "userListId: " + i.getUserListId() + "," +
+                        "listName: " + i.getListName() + "";;
+        }
+        return "Wishlist not found.";
+    }
+    @GetMapping(path = "/getWishListByName")
+    public @ResponseBody String getWishListByName(@RequestParam @NonNull String name) {
+        for(WishList i:wishListRepository.findAll()){
+            if(i.getListName().equals(name))
+                return "listId: " + i.getListId() + "," +
+                        "userListId: " + i.getUserListId() + "," +
+                        "listName: " + i.getListName() + "";;
+        }
+        return "Wishlist not found.";
+    }
+
+    /**
      * This PostMapping will allow us to add lists to our
      * database entity
      *
      * Literally this is all we need to add stuff to our database
      */
-    @PostMapping(path="/addWishList")
-    public @ResponseBody String addList (@RequestParam String listName, @RequestParam String listDescription) {
+    @GetMapping(path="/addWishList")
+    public @ResponseBody String addList (@RequestParam @NonNull String listName,
+                                         @RequestParam @NonNull String listDescription,
+                                         @RequestParam @NonNull Integer userListId) {
         WishList list = new WishList();
-        list.setListName(listName);
+
+        for(WishList wl : wishListRepository.findAll())
+            if(wl.getUserListId().equals(userListId))
+                if(wl.getListName().equals(listName)) {
+                    return "Create a unique list name.";
+                }
+
+        if(!listName.isBlank())
+            list.setListName(listName);
+        if(!listDescription.isBlank())
+            list.setListDescription(listDescription);
+        if(!userListId.toString().isBlank())
+            list.setUserListId(userListId);
+
 
         wishListRepository.save(list);
 
@@ -51,7 +93,7 @@ public class WishListApi {
      * (disconnecting the link)
      * TODO: add admin restriction/ from that same user
      */
-    @GetMapping("/deleteItemList")
+    @GetMapping("/deleteWishList")
     public @ResponseBody String deleteWishList (@RequestParam @NonNull Integer userListID, @RequestParam @NonNull Integer listID) {
         for(WishList currList: wishListRepository.findAll()){
             if(currList.getListId().equals(userListID) && currList.getListId().equals(listID)){
@@ -66,15 +108,16 @@ public class WishListApi {
      * this updates the fields of a User on the system.
      * TODO: add admin restriction/ from that same user
      */
-    @GetMapping("/UpdateItemList")
-    public @ResponseBody String UpdateWishList(@RequestParam Integer listId,
-                                               @RequestParam(required = false) String userListId,
+    @GetMapping("/updateWishList")
+    public @ResponseBody String updateWishList(@RequestParam Integer listId,
+                                               @RequestParam Integer userListId,
                                                @RequestParam(required = false) String listName,
                                                @RequestParam(required = false) String listDescription) {
         for(WishList currItemList: wishListRepository.findAll()){
             if(currItemList.getListId().equals(listId)){
-                if(!userListId.isBlank())
-                    currItemList.setListId(Integer.getInteger(userListId));
+                if(!userListId.toString().isBlank())
+                    currItemList.setUserListId(userListId);
+
 
                 if(!listName.isBlank())
                     currItemList.setListName(listName);
