@@ -3,6 +3,7 @@ package com.example.group07.project2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,14 +32,15 @@ public class UserApi {
         return userRepository.findAll();
     }
 
+
     /**
      * This PostMapping will allow us to add users to our
      * database entity
      *
      * Literally this is all we need to add stuff to our database
      */
-    @GetMapping(path="/addUser")
-    public @ResponseBody String addUser (@RequestParam @NonNull String username, @RequestParam @NonNull String password) {
+    @PostMapping(path="/addUser")
+    public @ResponseBody String addUser (@RequestParam String username, @RequestParam String password, Model model) {
         User user = new User();
         for(User u : userRepository.findAll()) {
             if (u.getUsername().toString().equals(username))
@@ -53,7 +55,10 @@ public class UserApi {
 
         userRepository.save(user);
 
-        return "Saved User!";
+
+        return "signUp";
+
+        //return "signUp";
     }
 
     /**
