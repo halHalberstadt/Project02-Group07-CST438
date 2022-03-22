@@ -15,6 +15,7 @@ WishListRepository wishListRepository;
     @RequestMapping(value="/allWishLists",method= RequestMethod.GET)
     public String wishList(Model model) {
         model.addAttribute("lists", wishListRepository.findAll());
+
         return "allWishLists";
     }
 }
