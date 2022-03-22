@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Page</title>
+</head>
+<body>
+the list should display here
+the wish list data base might be empty or something
+<ul>
+    <th:block th:each="list : ${lists}">
+        <li th:utext="${'Name: ' + list.listName + '  Description:  ' + list.listDescription}">..</li>
+
+    </th:block>
+</ul>
+
+
+</body>
+</html>
