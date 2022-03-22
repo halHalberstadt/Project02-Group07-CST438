@@ -6,7 +6,7 @@
 </head>
 <body>
 the list should display here
-the wish list data base might be empty
+the wish list data base might be empty or something
 <ul>
     <th:block th:each="list : ${lists}">
         <li th:utext="${'Name: ' + list.listName + '  Description:  ' + list.listDescription}">..</li>
