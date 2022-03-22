@@ -3,7 +3,6 @@ package com.example.group07.project2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -28,6 +27,7 @@ public class UserApi {
      * This path will actually return all users without
      * us having to type so much code!
      */
+
     @GetMapping(path = "/allUsers")
     public @ResponseBody Iterable<String> getAllUsers() {
         ArrayList<String> userList = new ArrayList<>();
@@ -39,7 +39,6 @@ public class UserApi {
         return userList;
     }
 
-
     /**
      * This PostMapping will allow us to add users to our
      * database entity
@@ -47,52 +46,15 @@ public class UserApi {
      * Literally this is all we need to add stuff to our database
      */
     @PostMapping(path="/addUser")
-    public @ResponseBody String addUser (@RequestParam String username, @RequestParam String password, Model model) {
+    public @ResponseBody String addUser (@RequestParam String name, @RequestParam String username, @RequestParam String password) {
         User user = new User();
-        for(User u : userRepository.findAll()) {
-            if (u.getUsername().toString().equals(username))
-                return "username taken!";
-        }
-
-        if(username.isBlank() || password.isBlank())
-            return "Invalid username or password";
-
+        user.setName(name);
         user.setUsername(username);
         user.setPassword(password);
 
         userRepository.save(user);
 
-
-        return "signUp";
-
-        //return "signUp";
-    }
-
-    /**
-     * This path will return just the user from the id in the url,
-     * or returns a not found message,
-     * NOTE: password is not shown when grabbed.
-     */
-    @GetMapping(path = "/getUserById")
-    public @ResponseBody String getUserById(@RequestParam @NonNull Integer id) {
-        for(User i:userRepository.findAll()){
-            if(i.getUserId().equals(id))
-                return "UserId: " + i.getUserId() + " , " +
-                        "name: " + i.getName() + " , " +
-                        "username: \"" + i.getUsername() + "\"";
-        }
-        return "User not found.";
-    }
-
-    @GetMapping(path = "/getUserByUsername")
-    public @ResponseBody String getUserByUsername(@RequestParam @NonNull String username) {
-        for(User i:userRepository.findAll()){
-            if(i.getUsername().equals(username))
-                return "UserId: " + i.getUserId() + ", " +
-                        "name: " + i.getName() + ", " +
-                        "username: \"" + i.getUsername() + "\"";
-        }
-        return "User not found.";
+        return "Saved User!";
     }
 
     @GetMapping(path="/findByName")
@@ -126,12 +88,12 @@ public class UserApi {
      * this updates the fields of a User on the system.
      * TODO: add admin restriction/ from that same user
      */
-    @GetMapping("/updateUser")
-    public @ResponseBody String updateUser(@RequestParam @NonNull Integer userID,
-                                           @RequestParam String username,
-                                           @RequestParam String password) {
+    @GetMapping("/UpdateUser")
+    public @ResponseBody String UpdateUser(@RequestParam Integer userID,
+                                           @RequestParam(required = false) String username,
+                                           @RequestParam(required = false) String password) {
         for(User currUser: userRepository.findAll()){
-            if(currUser.getUserId().toString().equals(userID.toString())){
+            if(currUser.getUserId().equals(userID)){
                 if(!username.isBlank())
                     currUser.setUsername(username);
 
