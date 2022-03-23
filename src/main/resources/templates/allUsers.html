@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <div th:replace="fragments/header :: ylHeader"></div>
     <meta charset="UTF-8">
-    <title> Home Page</title>
-    <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <title> Login Page</title>
+
+    <!--    I might need to remove the slash in front of the word static -->
+    <link th:href="@{/static/css/main.css}" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous" rel="stylesheet" />
 </head>
 <body>
     <ul>
-        <th:block th:each="user : ${users}">
-            <li th:utext="${'Name: ' + user.name + ' Username: ' + user.username}">..</li>
+        <form>
+            <h2> All Users </h2>
+            <th:block th:each="user : ${users}">
+                <p><li th:utext="${'Name: ' + user.name + ' Username: ' + user.username}">..</li>
+                <a href="/"> Delete </a>
+                <a href="/editProfile"> Update </a>
+                </p>
 
-        </th:block>
+            </th:block>
+        </form>
     </ul>
 
 </body>
