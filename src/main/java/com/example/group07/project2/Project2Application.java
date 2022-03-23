@@ -29,6 +29,11 @@ public class Project2Application {
         return "signUp";
     }
 
+    @RequestMapping("/editProfile")
+    String editProfile() {
+        return "editProfile";
+    }
+
 
     public static void main(String[] args) {
         SpringApplication.run(Project2Application.class, args);
