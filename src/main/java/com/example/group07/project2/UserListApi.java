@@ -65,7 +65,7 @@ public class UserListApi {
      * the id is our primary key and the userId is a foreign key, so I don't think
      * we set it. I'll need to find out about it!!
      */
-    @GetMapping(path="/addList")
+    @PostMapping(path="/addList")
     public @ResponseBody String addList (@RequestParam @NonNull String list) {
         UserList userList = new UserList();
         if(!list.isBlank()) {
@@ -86,42 +86,43 @@ public class UserListApi {
      * This detaches a UserList from the user and removes that
      * Userlist from the db.
      * TODO: add admin restriction/ from that same user
+     * TODO: MOVE THIS TO THE WishListApi to allow users to delete a single list
      */
-    @GetMapping("/deleteUserList")
-    public @ResponseBody String deleteUserList(@RequestParam @NonNull Integer userListID, @RequestParam @NonNull Integer userID) {
-        for(UserList currList: userListRepository.findAll()){
-            if(!currList.getUserId().toString().isBlank())
-                if(currList.getUserListId().toString().equals(userListID.toString()) &&
-                        currList.getUserId().toString().equals(userID.toString())) {
-                    userListRepository.deleteById(userListID);
-                    return "UserList was deleted.";
-                }
-        }
-        return "UserList was not found and could not be deleted.";
-    }
+//    @GetMapping("/deleteUserList")
+//    public @ResponseBody String deleteUserList(@RequestParam @NonNull Integer userListID, @RequestParam @NonNull Integer userID) {
+//        for(UserList currList: userListRepository.findAll()){
+//            if(!currList.getUserId().toString().isBlank())
+//                if(currList.getUserListId().toString().equals(userListID.toString()) &&
+//                        currList.getUserId().toString().equals(userID.toString())) {
+//                    userListRepository.deleteById(userListID);
+//                    return "UserList was deleted.";
+//                }
+//        }
+//        return "UserList was not found and could not be deleted.";
+//    }
 
     /**
      * UpdateUserList:
      * this updates the fields of a UpdateUserList on the system.
      * TODO: add admin restriction/ from that same user
      */
-    @GetMapping("/updateUserList")
+    @GetMapping("/UpdateUserList")
     public @ResponseBody String updateUserList(@RequestParam Integer userListId,
-                                               @RequestParam(required = false) Integer userId,
+                                               @RequestParam(required = false) String userId,
                                                @RequestParam(required = false) String list) {
         for(UserList currUserList: userListRepository.findAll()){
             if(currUserList.getUserListId().equals(userListId)){
-                if(!String.valueOf(userId).isBlank())
-                    currUserList.setUserId(userId);
+                if(!userId.isBlank())
+                    currUserList.setUserId(Integer.getInteger(userId));
 
                 if(!list.isBlank())
                     currUserList.setList(list);
 
                 userListRepository.save(currUserList);
-                return "UserList was found and updated.";
+                return "UserList with ID:" + userListId + " was found and updated.";
             }
         }
 
-        return "UserList was not found and could not be updated.";
+        return "User with ID: " + userListId + " was not found and could not be updated.";
     }
 }
