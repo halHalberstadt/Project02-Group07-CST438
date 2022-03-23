@@ -9,9 +9,34 @@
           crossorigin="anonymous" rel="stylesheet" />
 </head>
 <body>
-<h3> Allow the user to change their name and password. </h3>
-<h3> Allow the user to delete their account.
-    Deleting the account should get rid of all their database items. </h3>
+
+    <form method="post" style="max-width: 350px; margin: 0 auto;">
+
+        <div class="border border-primary p-5 rounded">
+            <h4> Update your Account </h4>
+            <p></p>
+            <p><input type="username" name="username" class="form-control" placeholder="New Username" /></p>
+            <p><input type="password" name="password" class="form-control" placeholder="New Password" /></p>
+            <p><input type="submit" value="Update" class="btn btn-primary" /></p>
+        </div>
+
+    </form>
+
+    <br> </br>
+
+    <form method="post" style="max-width: 350px; margin: 0 auto;">
+
+        <div class="border border-primary p-5 rounded">
+            <h4> Delete your Account </h4>
+            <p></p>
+            <p><input type="submit" value="Delete" class="btn btn-danger" /></p>
+        </div>
+
+    </form>
+
+    <h3> Allow the user to change their name and password. </h3>
+    <h3> Allow the user to delete their account.
+        Deleting the account should get rid of all their database items. </h3>
 
 </body>
 </html>
