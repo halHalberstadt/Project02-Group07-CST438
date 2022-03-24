@@ -9,7 +9,25 @@
           crossorigin="anonymous" rel="stylesheet" />
 </head>
 <body>
-<h1> Allow the user to change the URL, image, description and priority of the item.</h1>
-
+<h1> Edit Item</h1>
+<table>
+    <tr th:each="item : ${item}">
+    <form action="/itemApi/updateItem" method="post">
+        <p>
+        Item name:
+        <td th:text="${itemName}"></td>
+        <input type="text" name="newName" placeholder="name" th:field="*{itemName}"></p>
+        <p>
+        Item description:
+        <td th:text="${description}"></td>
+        <input type="text" name="newName" placeholder="description" th:field="*{description}"></p>
+        <p>
+        Item Quantity:
+        <td th:text="${quantity}"></td>
+        <input type="text" name="newName" placeholder="quantity" th:field="*{quantity}"></p>
+        <input type="submit" id="itemEditSubmitButon" value="Submit"> <input type="reset" value="Reset" />
+    </form>
+    </tr>
+</table>
 </body>
 </html>

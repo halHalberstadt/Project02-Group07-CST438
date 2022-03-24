@@ -10,33 +10,27 @@
 </head>
 <body>
 
-    <form method="post" style="max-width: 350px; margin: 0 auto;">
+<h1> Edit Item</h1>
+<table>
+    <tr th:each="item : ${user}">
+        <form action="/itemApi/updateItem" method="post">
+            <p>
+            Change Username:
+            <td th:text="${username}"></td>
+            <input type="text" name="newUsername" placeholder="username" th:field="*{username}"></p>
+            <p>
+            <p>
+                Change name:
+            <td th:text="${name}"></td>
+            <input type="text" name="newName" placeholder="name" th:field="*{name}"></p>
+            <p>
+            Change Password:
+            <td th:text="${password}"></td>
+            <input type="text" name="newName" placeholder="${password}" th:field="*{password}"></p>
 
-        <div class="border border-primary p-5 rounded">
-            <h4> Update your Account </h4>
-            <p></p>
-            <p><input type="username" name="username" class="form-control" placeholder="New Username" /></p>
-            <p><input type="password" name="password" class="form-control" placeholder="New Password" /></p>
-            <p><input type="submit" value="Update" class="btn btn-primary" /></p>
-        </div>
-
-    </form>
-
-    <br> </br>
-
-    <form method="post" style="max-width: 350px; margin: 0 auto;">
-
-        <div class="border border-primary p-5 rounded">
-            <h4> Delete your Account </h4>
-            <p></p>
-            <p><input type="submit" value="Delete" class="btn btn-danger" /></p>
-        </div>
-
-    </form>
-
-    <h3> Allow the user to change their name and password. </h3>
-    <h3> Allow the user to delete their account.
-        Deleting the account should get rid of all their database items. </h3>
-
+            <input type="submit" id="itemEditSubmitButon" value="Submit"> <input type="reset" value="Reset" />
+        </form>
+    </tr>
+</table>
 </body>
 </html>
