@@ -40,13 +40,13 @@ public class ItemApi {
         for(Item i:itemRepository.findAll()){
             if(i.getItemId().equals(id))
                 return "{\n\titemId:" + id +
-                    "\n\tlistId: " + i.getListId() + "," +
-                    "\n\titemName: \"" + i.getItemName() + "\"," +
-                    "\n\titemDescription: \"" + i.getItemDescription() + "\"," +
-                    "\n\titemCategory: \"" + i.getItemCategory() + "\"," +
-                    "\n\titemPrice: \"" + i.getItemPrice() + "\"," +
-                    "\n\titemQuantity: " + i.getItemQuantity() + "," +
-                    "\n\titemImage: \"" + i.getItemImage() + "\"\n}";
+                        "\n\tlistId: " + i.getListId() + "," +
+                        "\n\titemName: \"" + i.getItemName() + "\"," +
+                        "\n\titemDescription: \"" + i.getItemDescription() + "\"," +
+                        "\n\titemCategory: \"" + i.getItemCategory() + "\"," +
+                        "\n\titemPrice: \"" + i.getItemPrice() + "\"," +
+                        "\n\titemQuantity: " + i.getItemQuantity() + "," +
+                        "\n\titemImage: \"" + i.getItemImage() + "\"\n}";
         }
         return "Item not found.";
     }
@@ -69,7 +69,7 @@ public class ItemApi {
 
         boolean canSave = true;
         for (Item i:
-             itemRepository.findAll()) {
+                itemRepository.findAll()) {
             if(i.getItemName().equals(item.getItemName()) &&
                     i.getItemDescription().equals(item.getItemDescription()) &&
                     i.getItemCategory().equals(item.getItemCategory())){
@@ -88,7 +88,7 @@ public class ItemApi {
      * Deletes item off of the db.
      * TODO: add admin restriction
      */
-    @GetMapping("/deleteItemById")
+    @GetMapping("/deleteItem")
     public @ResponseBody String deleteItemById(@RequestParam @NonNull Integer itemID) {
         for(Item currItem: itemRepository.findAll()){
             if(currItem.getItemId().equals(itemID)){
@@ -116,8 +116,8 @@ public class ItemApi {
      * this updates the fields of a User on the system.
      * TODO: add admin restriction/ from that same user
      */
-    @GetMapping("/updateItem")
-    public @ResponseBody String updateItem(@RequestParam Integer itemID,
+    @GetMapping("/UpdateItem")
+    public @ResponseBody String UpdateItem(@RequestParam Integer itemID,
                                            @RequestParam(required = false) String listId,
                                            @RequestParam(required = false) String itemName,
                                            @RequestParam(required = false) String itemDescription,
@@ -150,11 +150,11 @@ public class ItemApi {
 
                 itemRepository.save(currItem);
 
-                return "The Item was found and updated!";
+                return "User: " + currItem.getItemName() + " with ID:" + itemID + " was found and updated.";
             }
         }
 
-        return "The Item was not found and could not be updated.";
+        return "User with ID: " + itemID + " was not found and could not be updated.";
     }
 
 

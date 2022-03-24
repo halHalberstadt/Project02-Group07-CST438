@@ -1,9 +1,6 @@
 package com.example.group07.project2;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * We are creating a User entity that represents
@@ -18,6 +15,16 @@ public class User {
     private String name;
     private String username;
     private String password;
+
+    /**
+     * user should be able to create a list, so we can create a List so
+     * the user can add his/her lists inside this list
+     *
+     * UserList is a list of lists, so we can add it here
+     *
+     * OneToOne relationships associate one record in one table with a single
+     * record in the other table
+     */
 
 
     /**
@@ -55,4 +62,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

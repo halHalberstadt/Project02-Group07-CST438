@@ -1,9 +1,7 @@
 package com.example.group07.project2;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * We are creating a UserList entity that represents
@@ -15,14 +13,19 @@ public class UserList {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer userListId;
 
-    private Integer userId;
-    private String list;
 
+    private Integer userId;
+    private String list;    // this is the name of the list
+
+//    @OneToMany
+//    private List<WishList> list2;
 
     /**
      * Getters and Setters for our private variables
      * This is the data we will be inserting into our entity
      */
+
+
     public Integer getUserListId() {
         return userListId;
     }

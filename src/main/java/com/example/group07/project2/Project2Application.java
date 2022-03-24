@@ -3,8 +3,11 @@ package com.example.group07.project2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+
 
 @Controller
 @SpringBootApplication
@@ -14,7 +17,6 @@ public class Project2Application {
      * Landing page (When someone is not logged in)
      */
     @RequestMapping("/")
-//    @ResponseBody
     String home() {
         return "home";
     }
