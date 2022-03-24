@@ -12,12 +12,12 @@
 <body>
 <ul>
     <form>
-        <h2>Lists</h2>
-    <th:block th:each="list : ${lists}">
+        <h2>items</h2>
+    <th:block th:each="item : ${items}">
         <p>
-        <li th:utext="${'Name: ' + list.listName + '  Description:  ' + list.listDescription}">..</li>
+        <li th:utext="${'Name: ' + item.itemName + '  Description:  ' + item.itemDescription}">..</li>
         <a  href="/"> Delete </a>
-        <a  th:href="@{/editList?(id=${list.listId})}"> Update </a>
+        <a  th:href="@{/editItem?(id=${item.itemId})}"> Update </a>
         </p>
     </th:block>
     </form>

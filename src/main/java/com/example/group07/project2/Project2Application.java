@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
 
 @Controller
 @SpringBootApplication
@@ -35,6 +36,12 @@ public class Project2Application {
     @RequestMapping("/signUp")
     String signUp() {
         return "signUp";
+    }
+
+    @RequestMapping("/allItems")
+    String allItems(Model model) {
+        model.addAttribute("items",itemRepository.findAll());
+        return "allItems";
     }
 
     @GetMapping("/editProfile")
