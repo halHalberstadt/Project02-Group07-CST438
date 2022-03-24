@@ -56,7 +56,7 @@ public class UserListApi {
     }
 
     /**
-     * This PostMapping will allow us to add users to our
+     * This PostMapping will allow us to add a UserList to our
      * database entity
      *
      * Literally this is all we need to add stuff to our database
@@ -70,11 +70,11 @@ public class UserListApi {
         UserList userList = new UserList();
         if(!list.isBlank()) {
             userList.setList(list);
-//            for(UserList ul : userListRepository.findAll())
-//                if(!ul.getUserId().toString().isBlank())
-//                    if(ul.getList().equals(userList.getList()) &&
-//                            ul.getUserId().toString().equals(userList.getUserId().toString()))
-//                        return "list already created.";
+            for(UserList ul : userListRepository.findAll())
+                if(!ul.getUserId().toString().isBlank())
+                    if(ul.getList().equals(userList.getList()) &&
+                            ul.getUserId().toString().equals(userList.getUserId().toString()))
+                        return "list already created.";
             userListRepository.save(userList);
             return "Saved!";
         }
@@ -86,20 +86,20 @@ public class UserListApi {
      * This detaches a UserList from the user and removes that
      * Userlist from the db.
      * TODO: add admin restriction/ from that same user
-     * TODO: MOVE THIS TO THE WishListApi to allow users to delete a single list
+     * TODO: Copy this to the WishListApi to allow users to delete a single list
      */
-//    @GetMapping("/deleteUserList")
-//    public @ResponseBody String deleteUserList(@RequestParam @NonNull Integer userListID, @RequestParam @NonNull Integer userID) {
-//        for(UserList currList: userListRepository.findAll()){
-//            if(!currList.getUserId().toString().isBlank())
-//                if(currList.getUserListId().toString().equals(userListID.toString()) &&
-//                        currList.getUserId().toString().equals(userID.toString())) {
-//                    userListRepository.deleteById(userListID);
-//                    return "UserList was deleted.";
-//                }
-//        }
-//        return "UserList was not found and could not be deleted.";
-//    }
+    @GetMapping("/deleteUserList")
+    public @ResponseBody String deleteUserList(@RequestParam @NonNull Integer userListID, @RequestParam @NonNull Integer userID) {
+        for(UserList currList: userListRepository.findAll()){
+            if(!currList.getUserId().toString().isBlank())
+                if(currList.getUserListId().toString().equals(userListID.toString()) &&
+                        currList.getUserId().toString().equals(userID.toString())) {
+                    userListRepository.deleteById(userListID);
+                    return "UserList was deleted.";
+                }
+        }
+        return "UserList was not found and could not be deleted.";
+    }
 
     /**
      * UpdateUserList:
