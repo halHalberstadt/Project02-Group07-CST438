@@ -16,7 +16,7 @@
     <th:block th:each="item : ${items}">
         <p>
         <li th:utext="${'Name: ' + item.itemName + '  Description:  ' + item.itemDescription}">..</li>
-        <a  href="/"> Delete </a>
+        <a  th:href="@{/itemApi/deleteItemById?(itemID=${item.itemId})}"> Delete </a>
         <a  th:href="@{/editItem?(id=${item.itemId})}"> Update </a>
         </p>
     </th:block>

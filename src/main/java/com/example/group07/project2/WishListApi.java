@@ -41,7 +41,7 @@ public class WishListApi {
             if(i.getListId().equals(id))
                 return "listId: " + i.getListId() + "," +
                         "userListId: " + i.getUserListId() + "," +
-                        "listName: " + i.getListName() + "";;
+                        "listName: " + i.getListName() + "";
         }
         return "Wishlist not found.";
     }
@@ -51,7 +51,7 @@ public class WishListApi {
             if(i.getListName().equals(name))
                 return "listId: " + i.getListId() + "," +
                         "userListId: " + i.getUserListId() + "," +
-                        "listName: " + i.getListName() + "";;
+                        "listName: " + i.getListName() + "";
         }
         return "Wishlist not found.";
     }
