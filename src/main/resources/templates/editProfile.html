@@ -10,27 +10,29 @@
 </head>
 <body>
 
-<h1> Edit Item</h1>
-<table>
-    <tr th:each="item : ${user}">
-        <form action="/itemApi/updateItem" method="post">
+<h1> Edit Profile</h1>
+        <form th:action="@{/userApi/UpdateUser}" th:object="${user}" method="GET">
+            <p>
+                ID:
+            <td th:text="${user.userId}"></td>
+            <input type="text" id="id" th:field="${user.userId}" th:readonly ></p>
+            <p>
             <p>
             Change Username:
-            <td th:text="${username}"></td>
-            <input type="text" name="newUsername" placeholder="username" th:field="*{username}"></p>
+            <td th:text="${user.username}"></td>
+            <input type="text" id="newUsername" placeholder="username" th:field="*{username}"></p>
             <p>
-            <p>
-                Change name:
-            <td th:text="${name}"></td>
-            <input type="text" name="newName" placeholder="name" th:field="*{name}"></p>
-            <p>
+<!--            <p>-->
+<!--                Change name:-->
+<!--            <td th:text="${user.name}"></td>-->
+<!--            <input type="text" id="newName" placeholder="name" th:field="*{name}"></p>-->
+<!--            <p>-->
             Change Password:
-            <td th:text="${password}"></td>
-            <input type="text" name="newName" placeholder="${password}" th:field="*{password}"></p>
+            <td th:text="${user.password}"></td>
+            <input type="text" id="newPassword" placeholder="password" th:field="*{password}"></p>
 
-            <input type="submit" id="itemEditSubmitButon" value="Submit"> <input type="reset" value="Reset" />
+<!--            <a  th:href="@{/itemApi/updateItem?(id=${user.userId},username=${newUsername},password=${newPassword})}"> Update </a>-->
+            <input type="submit" value="Submit" /><input type="reset" value="Reset" />
         </form>
-    </tr>
-</table>
 </body>
 </html>

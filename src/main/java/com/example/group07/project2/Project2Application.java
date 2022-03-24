@@ -43,7 +43,7 @@ public class Project2Application {
             return "home";
         }
         User user = userRepository.findById(id).get();
-        model.addAttribute("User", user);
+        model.addAttribute("user", user);
         return "editProfile";
     }
 

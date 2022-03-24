@@ -16,8 +16,8 @@
             <h2> All Users </h2>
             <th:block th:each="user : ${users}">
                 <p><li th:utext="${'Name: ' + user.name + ' Username: ' + user.username}">..</li>
-                <a href="/"> Delete </a>
-                <a href="/editProfile?id=${userId}}"> Update </a>
+                <a  href="/"> Delete </a>
+                <a  th:href="@{/editProfile?(id=${user.userId})}"> Update </a>
                 </p>
 
             </th:block>
