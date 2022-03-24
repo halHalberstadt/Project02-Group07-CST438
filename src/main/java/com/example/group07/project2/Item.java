@@ -13,7 +13,7 @@ import javax.persistence.Id;
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer itemId;
+    public Integer itemId;
 
     private Integer listId;
     private String itemName;

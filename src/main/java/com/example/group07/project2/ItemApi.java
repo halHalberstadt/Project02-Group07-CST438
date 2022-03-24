@@ -117,7 +117,7 @@ public class ItemApi {
      * TODO: add admin restriction/ from that same user
      */
     @GetMapping("/updateItem")
-    public @ResponseBody String updateItem(@RequestParam Integer itemID,
+    public @ResponseBody String updateItem(@RequestParam Integer itemId,
                                            @RequestParam(required = false) String listId,
                                            @RequestParam(required = false) String itemName,
                                            @RequestParam(required = false) String itemDescription,
@@ -126,7 +126,7 @@ public class ItemApi {
                                            @RequestParam(required = false) String itemQuantity,
                                            @RequestParam(required = false) String itemImage) {
         for(Item currItem: itemRepository.findAll()){
-            if(currItem.getItemId().equals(itemID)){
+            if(currItem.getItemId().equals(itemId)){
                 if(!listId.isBlank())
                     currItem.setListId(Integer.getInteger(listId));
 

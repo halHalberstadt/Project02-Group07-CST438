@@ -128,13 +128,13 @@ public class UserApi {
      * this updates the fields of a User on the system.
      * TODO: add admin restriction/ from that same user
      */
-    @GetMapping("/updateUser")
-    public @ResponseBody String updateUser(@RequestParam @NonNull Integer userID,
+    @GetMapping("/UpdateUser")
+    public @ResponseBody String UpdateUser(@RequestParam Integer userId,
                                            @RequestParam(required = false) String username,
                                            @RequestParam(required = false) String password) {
-        for(User currUser: userRepository.findAll()) {
-            if(currUser.getUserId().equals(userID)) {
-                if (!username.isBlank()) {
+        for(User currUser: userRepository.findAll()){
+            if(currUser.getUserId().equals(userId)){
+                if(!username.isBlank())
                     currUser.setUsername(username);
                 }
 
@@ -143,10 +143,13 @@ public class UserApi {
                 }
 
                 userRepository.save(currUser);
-                return "User: " + currUser.getUsername() + " with ID:" + userID + " was found and updated.";
+
+                return "User: " + currUser.getUsername() + " with ID:" + userId + " was found and updated.";
             }
         }
-        return "User with ID: " + userID + " was not found and could not be updated.";
+
+        return "User with ID: " + userId + " was not found and could not be updated.";
+
     }
 
     @RequestMapping("/userProfile")

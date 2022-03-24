@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <div th:replace="fragments/header2 :: ylHeader2"></div>
+    <div th:replace="fragments/header1 :: ylHeader1"></div>
     <meta charset="UTF-8">
     <title> Login Page</title>
     <link th:href="@{/static/css/main.css}" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -10,33 +10,29 @@
 </head>
 <body>
 
-    <form method="post" style="max-width: 350px; margin: 0 auto;">
+<h1> Edit Profile</h1>
+        <form th:action="@{/userApi/UpdateUser}" th:object="${user}" method="GET">
+            <p>
+                ID:
+            <td th:text="${user.userId}"></td>
+            <input type="text" id="id" th:field="${user.userId}" th:readonly ></p>
+            <p>
+            <p>
+            Change Username:
+            <td th:text="${user.username}"></td>
+            <input type="text" id="newUsername" placeholder="username" th:field="*{username}"></p>
+            <p>
+<!--            <p>-->
+<!--                Change name:-->
+<!--            <td th:text="${user.name}"></td>-->
+<!--            <input type="text" id="newName" placeholder="name" th:field="*{name}"></p>-->
+<!--            <p>-->
+            Change Password:
+            <td th:text="${user.password}"></td>
+            <input type="text" id="newPassword" placeholder="password" th:field="*{password}"></p>
 
-        <div class="border border-primary p-5 rounded">
-            <h4> Update your Account </h4>
-            <p></p>
-            <p><input type="username" name="username" class="form-control" placeholder="New Username" /></p>
-            <p><input type="password" name="password" class="form-control" placeholder="New Password" /></p>
-            <p><input type="submit" value="Update" class="btn btn-primary" /></p>
-        </div>
-
-    </form>
-
-    <br> </br>
-
-    <form method="post" style="max-width: 350px; margin: 0 auto;">
-
-        <div class="border border-primary p-5 rounded">
-            <h4> Delete your Account </h4>
-            <p></p>
-            <p><input type="submit" value="Delete" class="btn btn-danger" /></p>
-        </div>
-
-    </form>
-
-    <h3> Allow the user to change their name and password. </h3>
-    <h3> Allow the user to delete their account.
-        Deleting the account should get rid of all their database items. </h3>
-
+<!--            <a  th:href="@{/itemApi/updateItem?(id=${user.userId},username=${newUsername},password=${newPassword})}"> Update </a>-->
+            <input type="submit" value="Submit" /><input type="reset" value="Reset" />
+        </form>
 </body>
 </html>
