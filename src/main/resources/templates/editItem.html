@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <div th:replace="fragments/header2 :: ylHeader2"></div>
+    <div th:replace="fragments/header1 :: ylHeader1"></div>
     <meta charset="UTF-8">
     <title> Login Page</title>
     <link th:href="@{/static/css/main.css}" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -10,35 +10,42 @@
 </head>
 <body>
 <h1> Edit Item</h1>
-<form th:action="@{/itemApi/updateItem(itemID=${user.userId},listId=${},itemName=${},itemDescription=${},itemCategory=${},itemPrice=${},itemQuantity=${},itemID=${})}"
-      th:object="${user}" method="post">
+<form th:action="@{/itemApi/updateItem}" th:object="${item}" method="get"><p>
+    Id:
+    <td th:text="${item.itemId}"></td>
+    <input type="text" id="itemId" placeholder="username" th:field="${item.itemId}"></p>
+    <p>
+    <p>
+        Change list:
+    <td th:text="${item.listId}"></td>
+    <input type="text" id="listId" placeholder="listId" th:field="*{listId}"></p>
+    <p>
     <p>
         Change Name:
-    <td th:text="${user.itemName}"></td>
-    <input type="text" id="newUsername" placeholder="username" th:field="*{Username}"></p>
+    <td th:text="${item.itemName}"></td>
+    <input type="text" id="itemName" th:field="*{itemName}"></p>
     <p>
     <p>
         Change Description:
-    <td th:text="${user.itemDescription}"></td>
-    <input type="text" id="newName" placeholder="Description" th:field="*{Description}"></p>
+    <td th:text="${item.itemDescription}"></td>
+    <input type="text" id="itemDescription" th:field="*{itemDescription}"></p>
     <p>
         Change Category:
-    <td th:text="${user.itemCategory}"></td>
-    <input type="text" id="newPassword" placeholder="Category" th:field="*{Category}"></p>
+    <td th:text="${item.itemCategory}"></td>
+    <input type="text" id="itemCategory" th:field="*{itemCategory}"></p>
     <p>
         Change Price:
-    <td th:text="${user.itemCategory}"></td>
-    <input type="text" id="newPassword" placeholder="Price" th:field="*{Price}"></p>
+    <td th:text="${item.itemPrice}"></td>
+    <input type="text" id="Price" th:field="*{itemPrice}"></p>
     <p>
         Change Quantity:
-    <td th:text="${user.itemCategory}"></td>
-    <input type="text" id="newPassword" placeholder="Quantity" th:field="*{Quantity}"></p>
+    <td th:text="${item.itemQuantity}"></td>
+    <input type="text" id="Quantity" th:field="*{itemQuantity}"></p>
     <p>
-        Change Image:
-    <td th:text="${user.itemCategory}"></td>
-    <input type="text" id="newPassword" placeholder="Image" th:field="*{Image}"></p>
+        Change Image (URL):
+    <td th:text="${item.itemImage}"></td>
+    <input type="text" id="itemImage" th:field="*{itemImage}"></p>
 
-    <!--            <a  th:href="@{/itemApi/updateItem?(id=${user.userId},username=${newUsername},password=${newPassword})}"> Update </a>-->
     <input type="submit" value="Submit" /><input type="reset" value="Reset" />
 </form>
 </body>
