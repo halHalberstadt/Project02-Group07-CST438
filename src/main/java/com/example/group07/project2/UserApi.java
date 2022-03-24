@@ -52,7 +52,7 @@ public class UserApi {
     public @ResponseBody String addUser(@RequestParam @NonNull String name, @RequestParam @NonNull String username, @RequestParam @NonNull String password) {
         User user = new User();
         for(User u : userRepository.findAll()) {
-            if (u.getUsername().toString().equals(username)) {
+            if (u.getUsername().equals(username)) {
                 return "username taken!";
             }
         }
@@ -146,7 +146,6 @@ public class UserApi {
 
                 return "User: " + currUser.getUsername() + " with ID:" + userId + " was found and updated.";
             }
-        }
 
         return "User with ID: " + userId + " was not found and could not be updated.";
 

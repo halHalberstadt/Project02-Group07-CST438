@@ -16,7 +16,8 @@
     <th:block th:each="list : ${lists}">
         <p>
         <li th:utext="${'Name: ' + list.listName + '  Description:  ' + list.listDescription}">..</li>
-        <a  href="/"> Delete </a>
+<!--        This will need to be updated once users are kept throughout the session. -->
+        <a  href="@{/wishListApi/deleteWishList?(id=${list.listId})}"> Delete </a>
         <a  th:href="@{/editList?(id=${list.listId})}"> Update </a>
         </p>
     </th:block>
